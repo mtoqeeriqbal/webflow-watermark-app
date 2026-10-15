@@ -1,0 +1,4 @@
+node_modules/
+output*.png
+.env
+.DS_Store
