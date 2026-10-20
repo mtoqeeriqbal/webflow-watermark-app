@@ -3,7 +3,6 @@ const positionSelect = document.getElementById("positionSelect");
 const sizeRange = document.getElementById("sizeRange");
 const sizeLabel = document.getElementById("sizeLabel");
 const textInput = document.getElementById("textInput");
-
 const canvas = document.getElementById("preview");
 const ctx = canvas.getContext("2d");
 
