@@ -12,9 +12,11 @@
 <body>
   <h1>Watermark Preview</h1>
   <div class="controls">
-  <label>Text
-    <input type="text" id="textInput" value="© Toqeer" />
-  </label>
+    <label><input type="radio" name="typeRadio" value="text" checked /> Text</label>
+<label><input type="radio" name="typeRadio" value="logo" /> Logo</label>
+<label>Text
+  <input type="text" id="textInput" value="© Toqeer" />
+</label>
 
   <label>Position
     <select id="positionSelect">
@@ -32,6 +34,9 @@
   </label>
 </div>
   <input type="file" id="photoInput" accept="image/*" />
+  <label>Logo
+  <input type="file" id="logoInput" accept="image/*" />
+</label>
   <br />
   <canvas id="preview"></canvas>
 

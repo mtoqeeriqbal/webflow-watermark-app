@@ -15,7 +15,7 @@ Back to the [project README](../README.md).
 | 08 | Canvas: draw text watermark | done |
 | 09 | Live controls (text, position, size) | done |
 | 10 | Study guide — Day 1 (recall, practice, debugging checklist) | review |
-| 11 | Logo option in the preview (radio + logo picker) | next |
+| 11 | Logo option in the preview (radio + logo picker) | in progress (steps 1-3 done) |
 
 ## Roadmap
 1. Node basics ✔ 2. Browser canvas (in progress) 3. Designer Extension 4. Backend + OAuth 5. Pro features (bulk, restore, webhooks) 6. Deploy

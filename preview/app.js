@@ -1,3 +1,5 @@
+const logoInput = document.getElementById("logoInput");
+const typeRadios = document.querySelectorAll('input[name="typeRadio"]');
 const photoInput = document.getElementById("photoInput");
 const positionSelect = document.getElementById("positionSelect");
 const sizeRange = document.getElementById("sizeRange");
@@ -21,8 +23,10 @@ function getPosition(position, imgW, imgH, layerW, layerH, padding) {
 
 
 let currentImage = null;
+let currentLogo = null;
 
 const settings = {
+  type: "text",
   text: "© Toqeer",
   position: "bottom-right",
   size: 0.2,
@@ -30,11 +34,9 @@ const settings = {
 
 function draw() {
   if (!currentImage) return;
-
   canvas.width = currentImage.naturalWidth;
   canvas.height = currentImage.naturalHeight;
   ctx.drawImage(currentImage, 0, 0);
-
   drawText();
 }
 
@@ -87,6 +89,24 @@ photoInput.addEventListener("change", () => {
 
   img.onload = () => {
     currentImage = img;
+    draw();
+    URL.revokeObjectURL(url);
+  };
+
+  img.src = url;
+});
+
+
+logoInput.addEventListener("change", () => {
+  const file = logoInput.files[0];
+  if (!file) return;
+
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+
+  img.onload = () => {
+    currentLogo = img;
+    console.log("logo size:", img.naturalWidth, img.naturalHeight);
     draw();
     URL.revokeObjectURL(url);
   };
