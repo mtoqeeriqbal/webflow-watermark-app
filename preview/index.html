@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Watermark Preview</title>
+  <style>
+    body { font-family: sans-serif; padding: 24px; }
+    canvas { max-width: 100%; border: 1px solid #ccc; margin-top: 16px; }
+    .controls { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Watermark Preview</h1>
+  <div class="controls">
+  <label>Text
+    <input type="text" id="textInput" value="© Toqeer" />
+  </label>
+
+  <label>Position
+    <select id="positionSelect">
+      <option value="bottom-right">Bottom right</option>
+      <option value="bottom-left">Bottom left</option>
+      <option value="top-right">Top right</option>
+      <option value="top-left">Top left</option>
+      <option value="center">Center</option>
+    </select>
+  </label>
+
+  <label>Size
+    <input type="range" id="sizeRange" min="5" max="50" value="20" />
+    <span id="sizeLabel">20%</span>
+  </label>
+</div>
+  <input type="file" id="photoInput" accept="image/*" />
+  <br />
+  <canvas id="preview"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
