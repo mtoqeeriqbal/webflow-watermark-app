@@ -144,7 +144,12 @@ webflow-watermark/
 ├── logo.png              # sample logo
 ├── preview/
 │   ├── index.html        # browser preview page
-│   └── app.js            # canvas drawing + live controls
+│   ├── app.js            # entry point (imports events.js)
+│   ├── elements.js       # finds the page elements
+│   ├── state.js          # state (loaded images) and settings
+│   ├── position.js       # getPosition
+│   ├── draw.js           # paints photo + text/logo on the canvas
+│   └── events.js         # listeners (controls, file pickers)
 ├── lessons/              # step-by-step notes for every lesson
 ├── package.json
 └── README.md
@@ -181,7 +186,7 @@ const result = await addWatermark(photo, {
 await fs.writeFile("output.png", result);
 ```
 
-Open the live preview by opening `preview/index.html` in a browser (double-click is enough).
+Open the live preview through a local server (the preview uses ES modules, so double-clicking `index.html` will not work). In VS Code, right-click `preview/index.html` and choose **Open with Live Server**, or run `npx serve preview` and open the address it prints.
 
 ---
 
@@ -198,7 +203,7 @@ Open the live preview by opening `preview/index.html` in a browser (double-click
 | Phase | What | Status |
 |---|---|---|
 | 1 | Node basics: watermark one image, the `addWatermark` engine | done |
-| 2 | Browser canvas preview with live controls | in progress (logo option next) |
+| 2 | Browser canvas preview with live controls | done (text + logo, split into modules) |
 | 3 | Designer Extension: Webflow CLI, Designer API, list and watermark site assets | planned |
 | 4 | Backend + OAuth: Express, `.env`, Data API, watermark CMS images | planned |
 | 5 | Pro features: bulk apply, restore originals, webhooks, error handling | planned |

@@ -1,0 +1,9 @@
+export const logoInput = document.getElementById("logoInput");
+export const typeRadios = document.querySelectorAll('input[name="typeRadio"]');
+export const photoInput = document.getElementById("photoInput");
+export const positionSelect = document.getElementById("positionSelect");
+export const sizeRange = document.getElementById("sizeRange");
+export const sizeLabel = document.getElementById("sizeLabel");
+export const textInput = document.getElementById("textInput");
+export const canvas = document.getElementById("preview");
+export const ctx = canvas.getContext("2d");
