@@ -1,3 +1,4 @@
+// ===== 1. ELEMENTS =====
 const logoInput = document.getElementById("logoInput");
 const typeRadios = document.querySelectorAll('input[name="typeRadio"]');
 const photoInput = document.getElementById("photoInput");
@@ -8,6 +9,20 @@ const textInput = document.getElementById("textInput");
 const canvas = document.getElementById("preview");
 const ctx = canvas.getContext("2d");
 
+
+// ===== 2. STATE =====
+let currentImage = null;
+let currentLogo = null;
+
+const settings = {
+  type: "text",
+  text: "© Toqeer",
+  position: "bottom-right",
+  size: 0.2,
+};
+
+
+// ===== 3. HELPERS =====
 
 function getPosition(position, imgW, imgH, layerW, layerH, padding) {
   const positions = {
@@ -22,15 +37,8 @@ function getPosition(position, imgW, imgH, layerW, layerH, padding) {
 }
 
 
-let currentImage = null;
-let currentLogo = null;
 
-const settings = {
-  type: "text",
-  text: "© Toqeer",
-  position: "bottom-right",
-  size: 0.2,
-};
+// ===== 4. DRAWING =====
 
 function draw() {
   if (!currentImage) return;
@@ -38,13 +46,11 @@ function draw() {
   canvas.height = currentImage.naturalHeight;
   ctx.drawImage(currentImage, 0, 0);
   
-    if (settings.type === "logo") {
+  if (settings.type === "logo") {
     drawLogo();
   } else {
     drawText();
   }
-
-
 }
 
 function drawText() {
@@ -69,6 +75,29 @@ function drawText() {
 
   ctx.fillText(settings.text, left, top);
 }
+
+function drawLogo() {
+  if (!currentLogo) return;
+
+  const logoW = Math.round(canvas.width * settings.size);
+  const logoH = Math.round(currentLogo.naturalHeight * (logoW / currentLogo.naturalWidth));
+
+  const padding = Math.round(canvas.width / 40);
+  const { left, top } = getPosition(
+    settings.position, canvas.width, canvas.height, logoW, logoH, padding
+  );
+
+  ctx.drawImage(currentLogo, left, top, logoW, logoH);
+}
+
+// ===== 5. EVENTS =====
+
+typeRadios.forEach((radio) => {
+  radio.addEventListener("change", () => {
+    settings.type = radio.value;
+    draw();
+  });
+});
 
 textInput.addEventListener("input", () => {
   settings.text = textInput.value;
@@ -123,24 +152,3 @@ logoInput.addEventListener("change", () => {
 });
 
 
-function drawLogo() {
-  if (!currentLogo) return;
-
-  const logoW = Math.round(canvas.width * settings.size);
-  const logoH = Math.round(currentLogo.naturalHeight * (logoW / currentLogo.naturalWidth));
-
-  const padding = Math.round(canvas.width / 40);
-  const { left, top } = getPosition(
-    settings.position, canvas.width, canvas.height, logoW, logoH, padding
-  );
-
-  console.log({ logoW, logoH, left, top });
-  ctx.drawImage(currentLogo, left, top, logoW, logoH);
-}
-
-typeRadios.forEach((radio) => {
-  radio.addEventListener("change", () => {
-    settings.type = radio.value;
-    draw();
-  });
-});
