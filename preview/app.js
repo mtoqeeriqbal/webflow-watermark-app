@@ -37,7 +37,14 @@ function draw() {
   canvas.width = currentImage.naturalWidth;
   canvas.height = currentImage.naturalHeight;
   ctx.drawImage(currentImage, 0, 0);
-  drawText();
+  
+    if (settings.type === "logo") {
+    drawLogo();
+  } else {
+    drawText();
+  }
+
+
 }
 
 function drawText() {
@@ -99,6 +106,7 @@ photoInput.addEventListener("change", () => {
 
 logoInput.addEventListener("change", () => {
   const file = logoInput.files[0];
+
   if (!file) return;
 
   const url = URL.createObjectURL(file);
@@ -106,10 +114,33 @@ logoInput.addEventListener("change", () => {
 
   img.onload = () => {
     currentLogo = img;
-    console.log("logo size:", img.naturalWidth, img.naturalHeight);
+    console.log(currentLogo);
     draw();
     URL.revokeObjectURL(url);
   };
 
   img.src = url;
+});
+
+
+function drawLogo() {
+  if (!currentLogo) return;
+
+  const logoW = Math.round(canvas.width * settings.size);
+  const logoH = Math.round(currentLogo.naturalHeight * (logoW / currentLogo.naturalWidth));
+
+  const padding = Math.round(canvas.width / 40);
+  const { left, top } = getPosition(
+    settings.position, canvas.width, canvas.height, logoW, logoH, padding
+  );
+
+  console.log({ logoW, logoH, left, top });
+  ctx.drawImage(currentLogo, left, top, logoW, logoH);
+}
+
+typeRadios.forEach((radio) => {
+  radio.addEventListener("change", () => {
+    settings.type = radio.value;
+    draw();
+  });
 });
